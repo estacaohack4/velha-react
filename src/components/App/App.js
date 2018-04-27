@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import Casa from '../Casa/Casa';
+import LogicaJogo from '../../LogicaJogo';
 
 class App extends Component {
   componentWillMount(){
@@ -22,6 +23,10 @@ class App extends Component {
     }else{
       this.valorAtual = 'X';
     }
+
+    let logica = new LogicaJogo(this.state.casas);
+
+    console.log(logica.verificar());
   }
 
   render() {
