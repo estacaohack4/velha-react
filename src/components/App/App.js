@@ -4,19 +4,32 @@ import Casa from '../Casa/Casa';
 
 class App extends Component {
   componentWillMount(){
-    this.casas = ['O', 'X', 'X', 'O', ' ', ' ', 'X', ' ', 'O'];
+    this.valorAtual = 'X';
+
+    this.setState({
+      casas: ['', '', '', '', '', '', '', '', '']
+    });
   }
 
-  handleClick = (event) => {
-    console.log('k '+ event);
+  clique = (posicao) => {
+    let casas = this.state.casas;
+    casas[posicao] = this.valorAtual;
+    
+    this.setState({casas: casas});
+
+    if(this.valorAtual == 'X'){
+      this.valorAtual = 'O';
+    }else{
+      this.valorAtual = 'X';
+    }
   }
 
   render() {
     let tabuleiro = [];
     let i = 0;
-    for(let valorDaCasa of this.casas){
+    for(let valorDaCasa of this.state.casas){
+      tabuleiro.push(<Casa cliqueDoPai={this.clique} valor={valorDaCasa} posicao={i} key={i}/>)
       i++;
-      tabuleiro.push(<Casa valor={valorDaCasa} onClick={this.handleClick} key={i}/>)
     }
 
     return (
